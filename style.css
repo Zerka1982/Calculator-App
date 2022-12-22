@@ -14,9 +14,10 @@ body{
     display: grid;
     justify-content: center;
     align-content: center;
-    min-height: 100vh;
+    min-height: 80vh;
     grid-template-columns: repeat(4, 100px);
     grid-template-rows: minmax(120px, auto) repeat(5, 100px);
+    margin: 1rem;
 }
 .calculator-container  button {
     cursor: pointer;
