@@ -34,7 +34,7 @@ class MyCalculator {
         const previousValue = parseFloat(this.previousOperand) 
         const currentValue = parseFloat(this.currentOperand) 
         if(isNaN(previousValue) || isNaN(currentValue)) return
-        // Swutch statement to handle different operations
+        // Switch statement to handle different operations
         switch(this.operation) {
             case '+':
                 result =  previousValue + currentValue
@@ -73,11 +73,12 @@ class MyCalculator {
       }
     // Method to update the output result
     updateDisplay() {
-        this.currentValueTextElement.innerText = 
-        this.getDisplayNumber(this.currentOperand)
+        this.currentValueTextElement.innerText = this.getDisplayNumber(this.currentOperand)
+        //this.currentValueTextElement1.innerText = this.getDisplayNumber(this.currentOperand)
         if (this.operation != null) {
-            this.previousValueTextElement.innerText =
-                `${this.getDisplayNumber(this.previousOperand)} ${this.operation}`
+            this.previousValueTextElement.innerText = 
+              `${this.getDisplayNumber(this.previousOperand)} ${this.operation}`
+
         } else {
             this.previousValueTextElement.innerText = ''
         }
@@ -87,99 +88,132 @@ class MyCalculator {
 // Get all variables
 const numberBtns = document.querySelectorAll('[data-number]')
 const operationBtns = document.querySelectorAll('[data-operation]')
-const equalButton = document.querySelector('[data-equals]')
-const deleteBtn = document.querySelector('[data-delete]')
-const clearScreenBtn = document.querySelector('[data-clear-all]')
+const equalButton = document.querySelectorAll('[data-equals]')
+const deleteBtn = document.querySelectorAll('[data-delete]')
+const clearScreenBtn = document.querySelectorAll('[data-clear-all]')
 const previousValueTextElement = document.querySelector('[data-previous-value]')
 const currentValueTextElement = document.querySelector('[data-actual-value]')
+const previousValueTextElement1 = document.querySelector('[data-previous-value1]')
+const currentValueTextElement1 = document.querySelector('[data-actual-value1]')
 
-const calculator = new MyCalculator(previousValueTextElement, currentValueTextElement)
+let calculator = new MyCalculator(previousValueTextElement, currentValueTextElement)
+let calculator1 = new MyCalculator(previousValueTextElement1, currentValueTextElement1)
 
 // The forEach() method executes a function once for each [button number]
 numberBtns.forEach(button => {
-    button.addEventListener('click', () => {
-        calculator.appendNumber(button.innerText)
-        calculator.updateDisplay()
+    button.addEventListener('click', (e) => {
+        if( e.target.parentNode.id === 'calculatorID1') {
+            calculator.appendNumber(button.innerText)
+            calculator.updateDisplay()
+        } else {
+            calculator1.appendNumber(button.innerText)
+            calculator1.updateDisplay()
+        }
     })
 })
 
 // The forEach() method executes a function once for each operation [+,-,*,/]
 operationBtns.forEach(button => {
-    button.addEventListener('click', () => {
-        calculator.chooseOperator(button.innerText)
-        calculator.updateDisplay()
+    button.addEventListener('click', (e) => {
+        if( e.target.parentNode.id === 'calculatorID1') {
+            calculator.chooseOperator(button.innerText)
+            calculator.updateDisplay()
+        } else {
+            calculator1.chooseOperator(button.innerText)
+            calculator1.updateDisplay()
+        }
     })
 })
 
 // method is to register an event listener for equal button
-equalButton.addEventListener('click', button => {
-    calculator.calculate()
-    calculator.updateDisplay()
+equalButton.forEach(button => {
+    button.addEventListener('click', (e) => {
+        if( e.target.parentNode.id === 'calculatorID1') {
+            calculator.calculate()
+            calculator.updateDisplay()
+        } else {
+            calculator1.calculate()
+            calculator1.updateDisplay()
+        }
+    })
 })
 
 // Clear the screen [the output result]
-clearScreenBtn.addEventListener('click', button => {
-    calculator.clearScreen()
-    calculator.updateDisplay()
-    
-})
-// Delete last added number 
-deleteBtn.addEventListener('click', button => {
-    calculator.deleteLastNumber()
-    calculator.updateDisplay()
-})
-
-
-// Allow user to use the keyboard
-window.addEventListener('keydown', (e) => {
-    if(
-        // Allow user to use the keyboard numbers [0,1,2,3,4,5,6,7,8,9]
-        e.key === '0' || e.key === '1' || e.key === '2' || 
-        e.key === '3' || e.key === '4' || e.key === '5' || 
-        e.key === '6' || e.key === '7' || e.key === '8' || 
-        e.key === '9' || e.key === '.'
-    ) {
-        calculator.appendNumber(e.key)
-        calculator.updateDisplay()
-    } else if (
-        // Allow user to use the keyboard operators [+,*,-,/] 
-        e.key === '*' || e.key === '+' || e.key === '-' || e.key === '/'
-    ) {
-        calculator.chooseOperator(e.key)
-        calculator.updateDisplay()
-    } else if ( e.key === 'Enter') {
-        // Allow user to use the keyboard ['Enter'] to get result
-        calculator.calculate()
-        calculator.updateDisplay()
-    } else if ( e.key === 'c' || e.key === 'C' || e.key === 'delete') {
-        // Allow user to use the keyboard ['c','C', 'delete'] to clear screen
-        calculator.clearScreen()
-        calculator.updateDisplay()
-    } else if ( e.key === 'd' || e.key === 'D' || e.key === 'Backspace') {
-        // Allow user to use the keyboard  ['d','D'] to delete last number
-        calculator.deleteLastNumber()
-        calculator.updateDisplay()
-    } else {
-        // Do not allow user to use other keys than the predefined ones
-        alert('🚫 This key is not allowed 🚫')
-    }
+clearScreenBtn.forEach(button => {
+    button.addEventListener('click', (e) => {
+        if( e.target.parentNode.id === 'calculatorID1') {
+            calculator.clearScreen()
+            calculator.updateDisplay()
+        } else {
+            calculator1.clearScreen()
+            calculator1.updateDisplay()
+        }
+    })
 })
 
-// Disable right-click
-document.addEventListener('contextmenu', (e) => e.preventDefault());
+// Delete last added number
+deleteBtn.forEach(button => {
+    button.addEventListener('click', (e) => {
+        if( e.target.parentNode.id === 'calculatorID1') {
+            calculator.deleteLastNumber()
+            calculator.updateDisplay()
+        } else {
+            calculator1.deleteLastNumber()
+            calculator1.updateDisplay()
+        }
+    })
+})
 
-function ctrlShiftKey(e, keyCode) {
-  return e.ctrlKey && e.shiftKey && e.keyCode === keyCode.charCodeAt(0);
-}
+// // Allow user to use the keyboard
+// window.addEventListener('keydown', (e) => {
+//     if(
+//         // Allow user to use the keyboard numbers [0,1,2,3,4,5,6,7,8,9]
+//         e.key === '0' || e.key === '1' || e.key === '2' || 
+//         e.key === '3' || e.key === '4' || e.key === '5' || 
+//         e.key === '6' || e.key === '7' || e.key === '8' || 
+//         e.key === '9' || e.key === '.'
+//     ) {
+//         calculator.appendNumber(e.key)
+//         calculator.updateDisplay()
+//     } else if (
+//         // Allow user to use the keyboard operators [+,*,-,/] 
+//         e.key === '*' || e.key === '+' || e.key === '-' || e.key === '/'
+//     ) {
+//         calculator.chooseOperator(e.key)
+//         calculator.updateDisplay()
+//     } else if ( e.key === 'Enter') {
+//         // Allow user to use the keyboard ['Enter'] to get result
+//         calculator.calculate()
+//         calculator.updateDisplay()
+//     } else if ( e.key === 'c' || e.key === 'C' || e.key === 'delete') {
+//         // Allow user to use the keyboard ['c','C', 'delete'] to clear screen
+//         calculator.clearScreen()
+//         calculator.updateDisplay()
+//     } else if ( e.key === 'd' || e.key === 'D' || e.key === 'Backspace') {
+//         // Allow user to use the keyboard  ['d','D'] to delete last number
+//         calculator.deleteLastNumber()
+//         calculator.updateDisplay()
+//     } else {
+//         // Do not allow user to use other keys than the predefined ones
+//         alert('🚫 This key is not allowed 🚫')
+//     }
+// })
 
-document.onkeydown = (e) => {
-  // Disable F12, Ctrl + Shift + I, Ctrl + Shift + J, Ctrl + U
-  if (
-    event.keyCode === 123 ||
-    ctrlShiftKey(e, 'I') ||
-    ctrlShiftKey(e, 'J') ||
-    ctrlShiftKey(e, 'C') ||
-    (e.ctrlKey && e.keyCode === 'U'.charCodeAt(0))
-  )
-    return false;
-};
+// // Disable right-click
+// document.addEventListener('contextmenu', (e) => e.preventDefault());
+
+// function ctrlShiftKey(e, keyCode) {
+//   return e.ctrlKey && e.shiftKey && e.keyCode === keyCode.charCodeAt(0);
+// }
+
+// // Disable F12, Ctrl + Shift + I, Ctrl + Shift + J, Ctrl + U
+// document.onkeydown = (e) => {
+//   if (
+//     event.keyCode === 123 ||
+//     ctrlShiftKey(e, 'I') ||
+//     ctrlShiftKey(e, 'J') ||
+//     ctrlShiftKey(e, 'C') ||
+//     (e.ctrlKey && e.keyCode === 'U'.charCodeAt(0))
+//   )
+//     return false;
+// };
