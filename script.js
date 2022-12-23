@@ -164,56 +164,56 @@ deleteBtn.forEach(button => {
     })
 })
 
-// // Allow user to use the keyboard
-// window.addEventListener('keydown', (e) => {
-//     if(
-//         // Allow user to use the keyboard numbers [0,1,2,3,4,5,6,7,8,9]
-//         e.key === '0' || e.key === '1' || e.key === '2' || 
-//         e.key === '3' || e.key === '4' || e.key === '5' || 
-//         e.key === '6' || e.key === '7' || e.key === '8' || 
-//         e.key === '9' || e.key === '.'
-//     ) {
-//         calculator.appendNumber(e.key)
-//         calculator.updateDisplay()
-//     } else if (
-//         // Allow user to use the keyboard operators [+,*,-,/] 
-//         e.key === '*' || e.key === '+' || e.key === '-' || e.key === '/'
-//     ) {
-//         calculator.chooseOperator(e.key)
-//         calculator.updateDisplay()
-//     } else if ( e.key === 'Enter') {
-//         // Allow user to use the keyboard ['Enter'] to get result
-//         calculator.calculate()
-//         calculator.updateDisplay()
-//     } else if ( e.key === 'c' || e.key === 'C' || e.key === 'delete') {
-//         // Allow user to use the keyboard ['c','C', 'delete'] to clear screen
-//         calculator.clearScreen()
-//         calculator.updateDisplay()
-//     } else if ( e.key === 'd' || e.key === 'D' || e.key === 'Backspace') {
-//         // Allow user to use the keyboard  ['d','D'] to delete last number
-//         calculator.deleteLastNumber()
-//         calculator.updateDisplay()
-//     } else {
-//         // Do not allow user to use other keys than the predefined ones
-//         alert('🚫 This key is not allowed 🚫')
-//     }
-// })
+// Allow user to use the keyboard
+window.addEventListener('keydown', (e) => {
+    if(
+        // Allow user to use the keyboard numbers [0,1,2,3,4,5,6,7,8,9]
+        e.key === '0' || e.key === '1' || e.key === '2' || 
+        e.key === '3' || e.key === '4' || e.key === '5' || 
+        e.key === '6' || e.key === '7' || e.key === '8' || 
+        e.key === '9' || e.key === '.'
+    ) {
+        calculator.appendNumber(e.key)
+        calculator.updateDisplay()
+    } else if (
+        // Allow user to use the keyboard operators [+,*,-,/] 
+        e.key === '*' || e.key === '+' || e.key === '-' || e.key === '/'
+    ) {
+        calculator.chooseOperator(e.key)
+        calculator.updateDisplay()
+    } else if ( e.key === 'Enter') {
+        // Allow user to use the keyboard ['Enter'] to get result
+        calculator.calculate()
+        calculator.updateDisplay()
+    } else if ( e.key === 'c' || e.key === 'C' || e.key === 'delete') {
+        // Allow user to use the keyboard ['c','C', 'delete'] to clear screen
+        calculator.clearScreen()
+        calculator.updateDisplay()
+    } else if ( e.key === 'd' || e.key === 'D' || e.key === 'Backspace') {
+        // Allow user to use the keyboard  ['d','D'] to delete last number
+        calculator.deleteLastNumber()
+        calculator.updateDisplay()
+    } else {
+        // Do not allow user to use other keys than the predefined ones
+        alert('🚫 This key is not allowed 🚫')
+    }
+})
 
-// // Disable right-click
-// document.addEventListener('contextmenu', (e) => e.preventDefault());
+// Disable right-click
+document.addEventListener('contextmenu', (e) => e.preventDefault());
 
-// function ctrlShiftKey(e, keyCode) {
-//   return e.ctrlKey && e.shiftKey && e.keyCode === keyCode.charCodeAt(0);
-// }
+function ctrlShiftKey(e, keyCode) {
+  return e.ctrlKey && e.shiftKey && e.keyCode === keyCode.charCodeAt(0);
+}
 
-// // Disable F12, Ctrl + Shift + I, Ctrl + Shift + J, Ctrl + U
-// document.onkeydown = (e) => {
-//   if (
-//     event.keyCode === 123 ||
-//     ctrlShiftKey(e, 'I') ||
-//     ctrlShiftKey(e, 'J') ||
-//     ctrlShiftKey(e, 'C') ||
-//     (e.ctrlKey && e.keyCode === 'U'.charCodeAt(0))
-//   )
-//     return false;
-// };
+// Disable F12, Ctrl + Shift + I, Ctrl + Shift + J, Ctrl + U
+document.onkeydown = (e) => {
+  if (
+    event.keyCode === 123 ||
+    ctrlShiftKey(e, 'I') ||
+    ctrlShiftKey(e, 'J') ||
+    ctrlShiftKey(e, 'C') ||
+    (e.ctrlKey && e.keyCode === 'U'.charCodeAt(0))
+  )
+    return false;
+};
