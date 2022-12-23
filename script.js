@@ -102,7 +102,8 @@ let calculator1 = new MyCalculator(previousValueTextElement1, currentValueTextEl
 // The forEach() method executes a function once for each [button number]
 numberBtns.forEach(button => {
     button.addEventListener('click', (e) => {
-        if( e.target.parentNode.id === 'calculatorID1') {
+        let parentNodeID = e.target.parentNode.id
+        if( parentNodeID === 'calculatorID1') {
             calculator.appendNumber(button.innerText)
             calculator.updateDisplay()
         } else {
@@ -115,7 +116,8 @@ numberBtns.forEach(button => {
 // The forEach() method executes a function once for each operation [+,-,*,/]
 operationBtns.forEach(button => {
     button.addEventListener('click', (e) => {
-        if( e.target.parentNode.id === 'calculatorID1') {
+        let parentNodeID = e.target.parentNode.id
+        if( parentNodeID === 'calculatorID1') {
             calculator.chooseOperator(button.innerText)
             calculator.updateDisplay()
         } else {
@@ -128,7 +130,8 @@ operationBtns.forEach(button => {
 // method is to register an event listener for equal button
 equalButton.forEach(button => {
     button.addEventListener('click', (e) => {
-        if( e.target.parentNode.id === 'calculatorID1') {
+        let parentNodeID = e.target.parentNode.id
+        if( parentNodeID === 'calculatorID1') {
             calculator.calculate()
             calculator.updateDisplay()
         } else {
@@ -141,7 +144,8 @@ equalButton.forEach(button => {
 // Clear the screen [the output result]
 clearScreenBtn.forEach(button => {
     button.addEventListener('click', (e) => {
-        if( e.target.parentNode.id === 'calculatorID1') {
+        let parentNodeID = e.target.parentNode.id
+        if( parentNodeID === 'calculatorID1') {
             calculator.clearScreen()
             calculator.updateDisplay()
         } else {
@@ -154,7 +158,8 @@ clearScreenBtn.forEach(button => {
 // Delete last added number
 deleteBtn.forEach(button => {
     button.addEventListener('click', (e) => {
-        if( e.target.parentNode.id === 'calculatorID1') {
+        let parentNodeID = e.target.parentNode.id
+        if( parentNodeID === 'calculatorID1') {
             calculator.deleteLastNumber()
             calculator.updateDisplay()
         } else {
